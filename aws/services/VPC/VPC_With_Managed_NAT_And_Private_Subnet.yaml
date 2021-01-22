@@ -61,6 +61,7 @@
 
     VPC:
       Type: "AWS::EC2::VPC"
+      DeletionPolicy: Delete
       Properties:
         EnableDnsSupport: "true"
         EnableDnsHostnames: "true"
@@ -83,6 +84,7 @@
 
     PublicSubnet0:
       Type: "AWS::EC2::Subnet"
+      DeletionPolicy: Delete
       Properties:
         VpcId:
           Ref: "VPC"
@@ -114,6 +116,7 @@
 
     PublicSubnet1:
       Type: "AWS::EC2::Subnet"
+      DeletionPolicy: Delete
       Properties:
         VpcId:
           Ref: "VPC"
@@ -145,6 +148,7 @@
 
     PrivateSubnet0:
       Type: "AWS::EC2::Subnet"
+      DeletionPolicy: Delete
       Properties:
         VpcId:
           Ref: "VPC"
@@ -175,6 +179,7 @@
 
     PrivateSubnet1:
       Type: "AWS::EC2::Subnet"
+      DeletionPolicy: Delete
       Properties:
         VpcId:
           Ref: "VPC"
@@ -205,6 +210,7 @@
 
     InternetGateway:
       Type: "AWS::EC2::InternetGateway"
+      DeletionPolicy: Delete
       Properties:
         Tags:
           -
@@ -224,6 +230,7 @@
 
     GatewayToInternet:
       Type: "AWS::EC2::VPCGatewayAttachment"
+      DeletionPolicy: Delete
       Properties:
         VpcId:
           Ref: "VPC"
@@ -232,6 +239,7 @@
 
     PublicRouteTable:
       Type: "AWS::EC2::RouteTable"
+      DeletionPolicy: Delete
       Properties:
         VpcId:
           Ref: "VPC"
@@ -253,6 +261,7 @@
 
     PublicRoute:
       Type: "AWS::EC2::Route"
+      DeletionPolicy: Delete
       DependsOn: "GatewayToInternet"
       Properties:
         RouteTableId:
@@ -263,6 +272,7 @@
 
     PublicSubnetRouteTableAssociation0:
       Type: "AWS::EC2::SubnetRouteTableAssociation"
+      DeletionPolicy: Delete
       Properties:
         SubnetId:
           Ref: "PublicSubnet0"
@@ -271,6 +281,7 @@
 
     PublicSubnetRouteTableAssociation1:
       Type: "AWS::EC2::SubnetRouteTableAssociation"
+      DeletionPolicy: Delete
       Properties:
         SubnetId:
           Ref: "PublicSubnet1"
@@ -279,6 +290,7 @@
 
     PublicNetworkAcl:
       Type: "AWS::EC2::NetworkAcl"
+      DeletionPolicy: Delete
       Properties:
         VpcId:
           Ref: "VPC"
@@ -301,6 +313,7 @@
 
     InboundHTTPPublicNetworkAclEntry:
       Type: "AWS::EC2::NetworkAclEntry"
+      DeletionPolicy: Delete
       Properties:
         NetworkAclId:
           Ref: "PublicNetworkAcl"
@@ -315,6 +328,7 @@
 
     OutboundPublicNetworkAclEntry:
       Type: "AWS::EC2::NetworkAclEntry"
+      DeletionPolicy: Delete
       Properties:
         NetworkAclId:
           Ref: "PublicNetworkAcl"
@@ -329,6 +343,7 @@
 
     PublicSubnetNetworkAclAssociation0:
       Type: "AWS::EC2::SubnetNetworkAclAssociation"
+      DeletionPolicy: Delete
       Properties:
         SubnetId:
           Ref: "PublicSubnet0"
@@ -337,6 +352,7 @@
 
     PublicSubnetNetworkAclAssociation1:
       Type: "AWS::EC2::SubnetNetworkAclAssociation"
+      DeletionPolicy: Delete
       Properties:
         SubnetId:
           Ref: "PublicSubnet1"
@@ -345,16 +361,19 @@
 
     ElasticIP0:
       Type: "AWS::EC2::EIP"
+      DeletionPolicy: Delete
       Properties:
         Domain: "vpc"
 
     ElasticIP1:
       Type: "AWS::EC2::EIP"
+      DeletionPolicy: Delete
       Properties:
         Domain: "vpc"
 
     NATGateway0:
       Type: "AWS::EC2::NatGateway"
+      DeletionPolicy: Delete
       Properties:
         AllocationId:
           Fn::GetAtt:
@@ -365,6 +384,7 @@
 
     NATGateway1:
       Type: "AWS::EC2::NatGateway"
+      DeletionPolicy: Delete
       Properties:
         AllocationId:
           Fn::GetAtt:
@@ -375,6 +395,7 @@
 
     PrivateRouteTable0:
       Type: "AWS::EC2::RouteTable"
+      DeletionPolicy: Delete
       Properties:
         VpcId:
           Ref: "VPC"
@@ -401,6 +422,7 @@
 
     PrivateRouteToInternet0:
       Type: "AWS::EC2::Route"
+      DeletionPolicy: Delete
       Properties:
         RouteTableId:
           Ref: "PrivateRouteTable0"
@@ -410,6 +432,7 @@
 
     PrivateRouteToInternet1:
       Type: "AWS::EC2::Route"
+      DeletionPolicy: Delete
       Properties:
         RouteTableId:
           Ref: "PrivateRouteTable1"
@@ -419,6 +442,7 @@
 
     PrivateSubnetRouteTableAssociation0:
       Type: "AWS::EC2::SubnetRouteTableAssociation"
+      DeletionPolicy: Delete
       Properties:
         SubnetId:
           Ref: "PrivateSubnet0"
@@ -427,6 +451,8 @@
 
     PrivateSubnetRouteTableAssociation1:
       Type: "AWS::EC2::SubnetRouteTableAssociation"
+      DeletionPolicy: Delete
+      DeletionPolicy: Delete
       Properties:
         SubnetId:
           Ref: "PrivateSubnet1"
